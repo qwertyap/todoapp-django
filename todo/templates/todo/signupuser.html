@@ -23,7 +23,7 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" name="username" class="form-control" id="username" {% if username is not None %} value={{ username }} {% endif %} aria-describedby="usernameHelp">
+                    <input autocomplete="off" type="text" name="username" class="form-control" id="username" {% if username is not None %} value={{ username }} {% endif %} aria-describedby="usernameHelp">
                     <small id="usernameHelp" class="form-text text-muted">Your username must be unique. We'll let you know if someone has taken it already.</small>
                 <button type="submit" class="btn btn-secondary">Check Username</button>
                 </div>

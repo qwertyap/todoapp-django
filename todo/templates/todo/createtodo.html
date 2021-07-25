@@ -3,7 +3,7 @@
 {% block content %}
     <div class="row justify-content-center mt-5">
         <div class="col-md-5">
-            <h2>New Todo</h2>
+            <h2>Mood Change</h2>
         </div>
     </div>
     <div class="row justify-content-center mt-5">
@@ -16,16 +16,17 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" class="form-control" id="title" required>
+                    <label for="title">Mood</label>
+                    <input type="text" name="title" class="form-control" id="title" autocomplete="off" >
                 </div>
                 <div class="form-group">
-                    <label for="memo">Memo</label>
-                    <textarea name="memo" class="form-control" id="memo" ></textarea>
+                    <label for="memo">Mood Explain</label>
+                    
+                    <textarea name="memo" class="form-control" id="memo" autocomplete="off" ></textarea>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" name="important" class="form-check-input" id="important">
-                    <label class="form-check-label" for="important">Important</label>
+                    <label class="form-check-label" for="important">Depressed</label>
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </form>

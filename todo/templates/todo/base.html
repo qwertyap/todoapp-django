@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <link rel="icon" type="image/png"  href="{% static 'todo/logo.png' %}">
-    <title>Todo Woo</title>
+    <title>Moody</title>
 </head>
 <body>
 
@@ -19,7 +19,7 @@
 <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">
          <img src="{% static 'todo/logo.png' %}" width="30" height="30" class="d-inline-block align-top">
-        <span>Todo Woo</span>
+        <span>Moody</span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,15 +27,20 @@
     <div class="collapse navbar-collapse" id="navbarNav">
     {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
-
-                <li class="nav-item {{ current }}">
-                    <a class="nav-link" href="{% url 'currenttodos' %}">Current</a>
+                <li class="nav-item {{ profile }}">
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                 </li>
+                 <!-- <li class="nav-item {{ current }}">
+                    <a class="nav-link" href="{% url 'currenttodos' %}">Current</a>
+                </li> -->
                 <li class="nav-item {{ completed }}">
                     <a class="nav-link" href="{% url 'completedtodos' %}">Completed</a>
                 </li>
                 <li class="nav-item {{ create }}">
                     <a class="nav-link" href="{% url 'createtodo' %}">Create</a>
+                </li>
+                <li class="nav-item {{ member }}">
+                    <a class="nav-link" href="{% url 'member' %}">Member</a>
                 </li>
 
         </ul>

@@ -11,3 +11,11 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Image(models.Model):
+    photo = models.ImageField(upload_to="myimage")
+    date = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default="duck")
+
+    
