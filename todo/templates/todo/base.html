@@ -15,12 +15,13 @@
 <body>
 
 
-<nav class="navbar navbar-expand-md navbar-light bg-warning">
+<nav style="background-color:rgba(245, 12, 24, 0.658) ; " class="navbar navbar-expand-md navbar-light">
 <div class="container">
     <a class="navbar-brand" href="{% url 'home' %}">
-         <img src="{% static 'todo/logo.png' %}" width="30" height="30" class="d-inline-block align-top">
-        <span>Moody</span>
+         <img style=" border-radius: 200px 195px ;margin-top: 0px;" width=70px height=70px; src="{% static 'todo/moodylogonew.jpg' %}" class="d-inline-block align-top">
     </a>
+        <span style="padding-left: 10px;padding-right: 20px;"><a style="color: rgb(150, 7, 38);"href="{% url 'home' %}" ><h2 style="font-weight: 700;">Moody</h2></a></span>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -28,19 +29,19 @@
     {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
                 <li class="nav-item {{ profile }}">
-                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+                    <a style="color:rgb(248, 218, 218);" class="nav-link" href="{% url 'profile' %}"><h5>Profile</h5></a>
                 </li>
                  <!-- <li class="nav-item {{ current }}">
                     <a class="nav-link" href="{% url 'currenttodos' %}">Current</a>
                 </li> -->
                 <li class="nav-item {{ completed }}">
-                    <a class="nav-link" href="{% url 'completedtodos' %}">Completed</a>
+                    <a style="color:rgb(248, 218, 218);" class="nav-link" href="{% url 'completedtodos' %}"><h5>Current</h5></a>
                 </li>
                 <li class="nav-item {{ create }}">
-                    <a class="nav-link" href="{% url 'createtodo' %}">Create</a>
+                    <a style="color:rgb(248, 218, 218);" class="nav-link" href="{% url 'createtodo' %}"><h5>Create</h5></a>
                 </li>
                 <li class="nav-item {{ member }}">
-                    <a class="nav-link" href="{% url 'member' %}">Member</a>
+                    <a style="color:rgb(248, 218, 218);" class="nav-link" href="{% url 'member' %}"><h5>Member</h5></a>
                 </li>
 
         </ul>
@@ -48,7 +49,7 @@
     <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <li class="nav-item">
-                    <a href="#" onclick="$('#signOutBtn').click()" class="nav-link">Logout</a>
+                    <a href="#" onclick="$('#signOutBtn').click()" class="nav-link"><h5>Logout</h5></a>
                     <form style='display: none;' method="POST" action="{% url 'logoutuser' %}">
                         {% csrf_token %}
                         <button id="signOutBtn" type="submit">Logout</button>

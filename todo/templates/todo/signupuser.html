@@ -22,11 +22,24 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input autocomplete="off" type="text" name="username" class="form-control" id="username" {% if username is not None %} value={{ username }} {% endif %} aria-describedby="usernameHelp">
+                    <label for="username">Username/Email Id</label>
+                    <input autocomplete="off" type="email" name="username" class="form-control" id="username" {% if username is not None %} value={{ username }} {% endif %} aria-describedby="usernameHelp">
+
                     <small id="usernameHelp" class="form-text text-muted">Your username must be unique. We'll let you know if someone has taken it already.</small>
+
                 <button type="submit" class="btn btn-secondary">Check Username</button>
                 </div>
+
+                <div class="form-group">
+                    <label for="fname">First Name</label>
+                    <input style="text-transform: capitalize;" type="text" name="first_name" class="form-control" id="first_name" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="lname">Last Name</label>
+                    <input style="text-transform: capitalize;" type="text" name="last_name" class="form-control" id="last_name" autocomplete="off">
+                </div>
+
+
                 <div class="form-group">
                     <label for="password1">Password</label>
                     <input type="password" name="password1" class="form-control" id="password1">

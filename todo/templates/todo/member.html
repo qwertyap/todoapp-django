@@ -1,8 +1,8 @@
 {% extends "todo/base.html" %}
-
+{% load static %}
 {% block content %}
 <div class="row justify-content-center mt-5">
-    <div class="col-md-10">
+    <div class="col-md-9">
         {% if todos %}
         <h1>{{ todos.count }} Active Mood{{ todos.count|pluralize }}</h1>
         {% else %}
@@ -11,13 +11,38 @@
     </div>
 </div>
 <div class="row justify-content-center mt-5">
-    <div class="col-md-10">
-        {% if todos %}
+    <div class="col-md-9">
+        {% if img_todo %}
         <div class="list-group">
-            {% for todo in todos %}
-            <!-- <a href="{% url 'viewtodo' todo.id %}" -->
+           
+            
+            {% for todo , img in img_todo %}
+            <a href=""
                 <a href=""
-                class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.user }}</b>{% if todo.title %} - {{ todo.title|truncatechars:30 }}{% endif %}</a>
+                class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}">
+                {% if not img %}
+                
+                <img src="{% static 'todo/duck.jpg' %}" style=" border-radius: 200px 195px ;margin-top: 0px;" width=70px height=70px;>
+                <b style="color:rgb(4, 82, 82); font-weight: 800;font-family: Poppins, sans-serif;padding-left: 20px; padding-right: 20px;">{{ todo.user.first_name }} {{ todo.user.last_name }}</b>
+                <!-- <span style="text-align: right;"> {% if todo.title|truncatechars:30 %} </span> 
+                {{ todo.title|truncatechars:30}} {% endif %} -->
+
+                <b><em style="position: relative;left:50px; text-align:right; padding-right: 20px;">{{ todo.title|truncatechars:30}}</em></b>
+                </a>
+                <br>
+
+                {% else %}
+                <img style=" border-radius: 200px 195px ;margin-top: 0px;" width=70px height=70px; src="{{ img.photo.url }}" width=10%>
+                
+
+
+                <b style="color:rgb(4, 82, 82); font-weight: 800;font-family: Poppins, sans-serif; padding-left: 20px; padding-right: 20px;">{{ todo.user.first_name }} {{ todo.user.last_name }}</b>
+                <b><em style="position: relative;left:50px; text-align:right; padding-right: 20px;">
+                    {{todo.title|truncatechars:30}}</em></b></a>
+                <br>
+
+                {% endif %}
+                
             {% endfor %}
         
         {% else %}

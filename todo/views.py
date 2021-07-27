@@ -32,14 +32,12 @@ def signupuser(request):
                 elif (request.POST['password1'] == request.POST['password2']):
                     try:
                         user = User.objects.create_user(
-                            request.POST['username'], password=request.POST['password1'])
+                            request.POST['username'], password=request.POST['password1'], first_name=request.POST['first_name'], last_name=request.POST['last_name'])
                         user.save()
                         login(request, user)
                         return redirect('profile')
                     except:
-                        pass
-                    # except IntegrityError:
-                    #     return render(request, 'todo/signupuser.html', {'form': UserCreationForm(), 'error': 'That username has already been taken. Please choose a new username'})
+                        return render(request, 'todo/signupuser.html', {'form': UserCreationForm(), 'error': 'Some Error occured try again please.'})
                 else:
                     return render(request, 'todo/signupuser.html', {'form': UserCreationForm(), "username": request.POST['username'], "uservalid": "Username Available", 'error': 'Passwords did not match'})
 
@@ -103,8 +101,9 @@ def viewtodo(request, todo_pk):
     else:
         try:
             form = TodoForm(request.POST, instance=todo)
+            # form.datecompleted = timezone.now()
             form.save()
-            return redirect('currenttodos')
+            return redirect('member')
         except ValueError:
             return render(request, 'todo/viewtodo.html', {'todo': todo, 'form': form, 'error': 'Bad info'})
 
@@ -123,45 +122,88 @@ def deletetodo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
     if request.method == 'POST':
         todo.delete()
-        return redirect('currenttodos')
+        return redirect('completedtodos')
 
 
 @login_required
 def member(request):
     # return render(request, 'todo/member.html')
     # todos = Todo.objects.all()
-    l = []
+    # images = Image.objects.filter(user=request.user)
+    
+    todo = []
     check_list=[]
     todos = Todo.objects.order_by("-datecompleted")
     for i in todos:
         if i.user not in check_list:
             # print(i.user)
             check_list.append(i.user)
-            l.append(i)
-
+            todo.append(i)
+    # print("yo",check_list)
+    img=[]
+    for i in check_list:
+        # images = Image.objects.filter(user=i).order_by('-date')
+        imgaes=""
+        images = Image.objects.filter(user=i).order_by('-date')
+        # print(images.values())
+        if images:
+            for i in images:
+                img.append(i)
+                break
+        else:
+            img.append(0)
+        # print(img)
     
-    return render(request, 'todo/member.html', {'todos': l})
+    # user1 = User.objects.all()
+    # temp_userlist = []
+    # userlist = []
+    # for i in user1:
+    #     if i.username in check_list:
+    #         userlist.append(i)
+
+        # print((user_name).user)
+    
+    img_todo = []
+    for i in range(len(todo)):
+        img_todo.append((todo[i], img[i]))
+        # print((todo[i], img[i]))
+    
+        
+    # images = Image.objects.filter(user=request.user)
+    # print(images.values())
+    # img = []
+    # # imguser = []
+    # for i in images:
+    #     if 
+    #     img.append(i)
+
+    return render(request, 'todo/member.html', {'todos': todo, "images": img, "img_todo": img_todo})
 
 
 @login_required
 def profile(request):
-    # form = TodoForm(request.POST)
-    # newtodo = form.save(commit=False)
-    # newtodo.user = request.user
-    # newtodo.save()
-    # return redirect('currenttodos')
-    # if request.method == 'GET':
-    #     return render(request, 'todo/profile.html', {'form': ImageForm()})
+    # user1 = User.objects.filter(user=request.user)
+    # print((User.user))
+    user1 = User.objects.all()
+    currentuser="a"
+    usernow = str(request.user)
+
+    for i in user1:
+        # print("1st")
+        # print(type(i.username))
+        # print(type(usernow))
+        if i.username == usernow:
+            currentuser = i
+    print(currentuser.first_name)
     if request.method == "POST":
         form = ImageForm(request.POST, request.FILES)
         newform = form.save(commit=False)
-        if form.is_valid():
-            newform.user=request.user
-            newform.save()
+        newform.user=request.user
+        newform.save()
     form = ImageForm()
     images = Image.objects.filter(user=request.user)
-    # print(list(images))
+    # print((images).values())
     img=""
     for i in images:
         img=i
-    return render(request, 'todo/profile.html', {'images': img, 'form': form})
+    return render(request, 'todo/profile.html', {'images': img, 'form': form, "currentuser": currentuser})

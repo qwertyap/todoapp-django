@@ -14,8 +14,9 @@ class Todo(models.Model):
 
 
 class Image(models.Model):
-    photo = models.ImageField(upload_to="myimage")
+    photo = models.ImageField(upload_to="myimage",default="myimage/duck.jpg")
     date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE,default="duck")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     

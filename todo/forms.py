@@ -12,3 +12,5 @@ class ImageForm(ModelForm):
         model = Image
         fields = ['photo']
         labels = {'photo': ''}
+
+

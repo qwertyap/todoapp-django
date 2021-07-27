@@ -8,8 +8,10 @@ class TodoAdmin(admin.ModelAdmin):
 
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ['photo', 'date','user']
+    list_display = ['photo', 'date', 'user']
+
 
 
 admin.site.register(Todo, TodoAdmin)
 admin.site.register(Image, ImageAdmin)
+
